@@ -7,6 +7,11 @@
         "dockerfile": "Dockerfile"
     },
 
+    "runArgs": [
+        "--gpus", "all",
+        "--privileged"
+    ],
+
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
         "ghcr.io/devcontainers/features/git:1": {},
