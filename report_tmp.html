@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="uib-inf265-project-3">UIB INF265 Project 3</h1>
+<p>Group: <strong>Project 3 17</strong><br>
+Students:</p>
+<ul>
+<li><strong>Mats Omland Dyrøy (mdy020)</strong></li>
+<li><strong>Linus Krystad Raaen (zec018)</strong></li>
+</ul>
+<h2 id="distribution-of-labor">Distribution of labor</h2>
+<p>We mostly met at <code>Høyteknologisenteret</code> and performed our work there.<br>
+Mats did most of the programming, Linus provided statistical insights and competence in deep learning.<br>
+A computer did most of the computations, and here are the specs:<br>
+<strong>OS:</strong> <code>Windows 11 Pro N</code><br>
+<strong>CPU:</strong> <code>Intel Core i9-10850K</code><br>
+<strong>GPU:</strong> <code>NVIDIA GeForce GTX 980 Ti</code><br>
+<strong>RAM:</strong> <code>32 GB</code></p>
+<h1 id="1-the-data">1. The data</h1>
+<p>Before getting started, we investigated the dataset.<br>
+The training data consists of <code>13</code> books free books from the <a href="https://www.gutenberg.org">Gutenberg project</a>. The validation and testing datasets consists of one book each from the same project.<br>
+All the books are in english.</p>
+<h2 id="11-preprocessing">1.1 Preprocessing</h2>
+<p>Processing of the raw data happens at the top of the notebook through the <code>create_tokens</code> and <code>create_vocabulary</code> methods.</p>
+<p><code>create_tokens</code> reads all the books in a given dataset (Identified by <code>data/input/&lt;dataset-name&gt;/&lt;book-name&gt;.txt</code>) and concats the data to generete one large string that is then split into tokens (word in our case).<br>
+This gives us all the words from all the books in a dataset in the correct order.<br>
+Because of this approach, the contexts formed when crossing a book-boundary will not nececarrily make sense.<br>
+We choose to accept this because the ratio of good sentences to word boundaries are very high.<br>
+This function is used three times to create the <code>words_train</code> (Training words), <code>words_val</code> (Validation words) and <code>words_test</code> (Testing words).</p>
+<p><code>create_vocabulary</code> takes a collection of words and creates a vocabulary of all the unique words that occur more than <code>100</code> times.<br>
+In our code, we choose to base the vocabulary on the <code>words_train</code> (all words in the training set) as it would create the most complete vocabulary.<br>
+To focus on words, we also remove all names and numbers from the vocabulary.<br>
+This function is only used once to generate the global <code>vocabulary</code> and <code>VOCABULARY_SIZE</code> values which are used throughout the rest of the assignment.</p>
+<h2 id="12-preprocessed">1.2 Preprocessed</h2>
+<p>When preprocessing was complete, we had three sets of ordered tokens <code>words_train</code>, <code>words_val</code> and <code>words_test</code> used for training, validation and testing respectively.<br>
+We also had <code>vocabulary</code> which was a lookup table for all the words our models will be able to understand along with a <code>&lt;unk&gt;</code>-token for unknown words.</p>
+<p>The dataset distrubition looked like this:<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/word_counts.png" alt="Word counts"><br>
+The training dataset contains significantly more tokens than the validation and testing sets.<br>
+Out of the <code>53 105</code> unique tokens in the training data, we only kept <code>1 880</code>.<br>
+Because of this, we expect low performance as out models will only understand <code>~4%</code> of the words.</p>
+<h1 id="2-word-embeddings">2. Word embeddings</h1>
+<p>When selecting the global hyperparameters for the <code>CBOW</code> models, we naively thought the computer could handle an embeddingsdimension of <code>32</code> since the assignment proposes <code>16</code> as small.<br>
+This was a rookie-mistake and training took <code>3 hours</code>. (3 hours after we got <code>cuda</code> working that is).</p>
+<h2 id="21-choosing-global-parameters">2.1 Choosing global parameters</h2>
+<p>As discussed previously, something posessed us to choose <code>32</code> as the size of the embeddings dimension.<br>
+Increasing the <code>batch_size</code> ment we (the computer) could spend less time scheduling GPU-calls and more time executing GPU-calls resulting in faster results. Therefore we found <code>8192</code> to be a good compromise between training speed and memory usage. We decided that <code>5</code> was number and thus was fit to be the <code>context_size</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>context_size</code></th>
+<th style="text-align:center"><code>batch_size</code></th>
+<th style="text-align:center"><code>epoch_count</code></th>
+<th style="text-align:center"><code>embeddings_dim</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>5</code></td>
+<td style="text-align:center"><code>8192</code></td>
+<td style="text-align:center"><code>100</code></td>
+<td style="text-align:center"><code>32</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-training">2.2 Training</h2>
+<p>We trained the CBOW model by feeding it fixed length contexts of <code>5</code> tokens and had it try to predict the next token. We had lots of trouble with the <code>Adam</code> optimizer, and therefore choose to go with <code>SGD</code> instead.<br>
+We decided to use a simple architecture of one <code>embedding</code>-layer and one <code>fully-connected</code>-layer.</p>
+<h2 id="23-the-models">2.3 The models</h2>
+<p>We three variants of out <code>CBOW</code>-network:</p>
+<h3 id="loss">Loss</h3>
+<p><img src="file:///workspaces/uib.inf265.project3/docs/loss_CBOW_CrossEntropyLoss_SGD-lr0.0010.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_CBOW_CrossEntropyLoss_SGD-lr0.0010.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_CBOW_CrossEntropyLoss_SGD-lr0.0010.png" alt="Loss"></p>
+<h2 id="24-selection">2.4 Selection</h2>
+<p>Please note that the scale differes on the loss functions. For a fair comparison, we tested the models on a dataset made from the validation tokens:<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracycbow.png" alt="CBOW Accuracy"></p>
+<p>It's a close race, but <code>CBOW_CrossEntropyLoss_SGD-lr0.0200</code> performs the best.<br>
+That said, since we picked the best performer on the validation set, we need new data to estimate the models true performance:<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracy_cbow_best.png" alt="CBOW Best Accuracy"></p>
+<p>If scoring low was good, out model would be great! Luckily, in this case we are not interrested in the model, we only want the embedding.<br>
+After extracting the embedding and storing it as the global <code>embedding</code>-variable, we can test it.</p>
+<h2 id="25-embeddings">2.5 Embeddings</h2>
+<p>We test our embeddings by taking interresting samples of which words are similar.<br>
+To compute similarity, we use <code>cosine similarity</code> (This similarity has less bias for common words that say euclidian distance).</p>
+<p>Here are some words and their <code>10</code> most similar words. (<code>1</code> is the most similar)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Word</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">9</th>
+<th style="text-align:center">10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>king</code></td>
+<td style="text-align:center">powerful</td>
+<td style="text-align:center">particularly</td>
+<td style="text-align:center">slept</td>
+<td style="text-align:center">effort</td>
+<td style="text-align:center">repeated</td>
+<td style="text-align:center">priest</td>
+<td style="text-align:center">arrival</td>
+<td style="text-align:center">dress</td>
+<td style="text-align:center">would</td>
+<td style="text-align:center">suppose</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>queen</code></td>
+<td style="text-align:center">laid</td>
+<td style="text-align:center">interresting</td>
+<td style="text-align:center">difficult</td>
+<td style="text-align:center">vast</td>
+<td style="text-align:center">conceal</td>
+<td style="text-align:center">foot</td>
+<td style="text-align:center">figure</td>
+<td style="text-align:center">note</td>
+<td style="text-align:center">fact</td>
+<td style="text-align:center">honest</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>man</code></td>
+<td style="text-align:center">begin</td>
+<td style="text-align:center">morning</td>
+<td style="text-align:center">hung</td>
+<td style="text-align:center">crossing</td>
+<td style="text-align:center">paces</td>
+<td style="text-align:center">slightly</td>
+<td style="text-align:center">guests</td>
+<td style="text-align:center">frequently</td>
+<td style="text-align:center">terror</td>
+<td style="text-align:center">hastily</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>woman</code></td>
+<td style="text-align:center">bad</td>
+<td style="text-align:center">branch</td>
+<td style="text-align:center">sppear</td>
+<td style="text-align:center">shudder</td>
+<td style="text-align:center">usual</td>
+<td style="text-align:center">there</td>
+<td style="text-align:center">captain</td>
+<td style="text-align:center">wind</td>
+<td style="text-align:center">boy</td>
+<td style="text-align:center">gradually</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>he</code></td>
+<td style="text-align:center">hearts</td>
+<td style="text-align:center">begged</td>
+<td style="text-align:center">shudder</td>
+<td style="text-align:center">military</td>
+<td style="text-align:center">marriage</td>
+<td style="text-align:center">proper</td>
+<td style="text-align:center">yourself</td>
+<td style="text-align:center">skald</td>
+<td style="text-align:center">husband</td>
+<td style="text-align:center">beds</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>she</code></td>
+<td style="text-align:center">wanted</td>
+<td style="text-align:center">quick</td>
+<td style="text-align:center">provided</td>
+<td style="text-align:center">reality</td>
+<td style="text-align:center">larger</td>
+<td style="text-align:center">found</td>
+<td style="text-align:center">driving</td>
+<td style="text-align:center">daughter</td>
+<td style="text-align:center">relations</td>
+<td style="text-align:center">suppose</td>
+</tr>
+</tbody>
+</table>
+<p>I could go on, but you get the idea. The embedding has not learned much of anything.<br>
+You can find more examples in the notebook, but those are also mostly nonsense.<br>
+On the bright side, it has concluded that <code>king</code> is similar to <code>powerful</code>, <code>good</code> is similar to <code>proper</code>, <code>she</code> is similar to <code>daughter</code> and <code>he</code> is similar to <code>husband</code>. That is something.<br>
+On the darker side, it is completely convinced that <code>woman</code> is <code>bad</code>.</p>
+<p>Overall I would argue the embeddings are quite bad.</p>
+<p>To play around with the embeddings, use <code>word_find_top_closest</code> or <code>word_find_closest</code>. The functions have very similar names but can answer two very different questions.<br>
+<code>word_find_top_closest</code> finds the top <code>n</code> most similar words to the given word.<br>
+<code>word_find_closest</code> finds the closest word to the given embedding.<br>
+This can answer questions like <code>doctor - man + woman = ?</code>.</p>
+<h2 id="26-tensorflow-projector">2.6 Tensorflow Projector</h2>
+<p>This visualization gave me very little.<br>
+The position in the visualizer has no correspondance to the words similarities to each other.<br>
+This is inpart due to the word embeddings containing 32 dimensions, but are being squished down to three. (<em>Two in the image</em>)<br>
+To highlight this, I have marked the word <code>surpised</code> and the five most similar words to it.</p>
+<p>This is a problam that is very difficult to overcome, <em>(maybe impossible?)</em> , as we observe the same lack of positional meaning when looking at the proper embeddings like <code>word2vec</code>.</p>
+<p><img src="file:///workspaces/uib.inf265.project3/docs/tensorflow_projection.png" alt="Tensorflow projection"></p>
+<h1 id="3-conjugating-be-and-have">3. Conjugating <em>be</em> and <em>have</em></h1>
+<p>Now that the <code>vocabulary</code> and <code>embeddings</code> are in place, we can work on the conjugation models.<br>
+At first, our models were trained to predict exactly one of <code>&lt;unk&gt;</code>, <code>be</code>, <code>am</code>, <code>are</code>, <code>is</code>, <code>was</code>, <code>were</code>, <code>been</code>, <code>being</code>, <code>have</code>, <code>has</code>, <code>had</code> and <code>having</code>.<br>
+We quickly learned that the models would then learn to always preduct <code>&lt;unk&gt;</code> as this made up <code>95%</code> of our training cases.<br>
+We identified this issue by using the <code>BeHaveAlways</code>-model predicting a constant value <code>&lt;unk&gt;</code>.<br>
+In heinsight, we should have trained the model like we did in <code>Project 2</code> by having different loss functions for testcases with and without an actual word.</p>
+<h2 id="31-global-parameters">3.1 Global parameters</h2>
+<p>Since we removed all the training cases where the target was <code>&lt;unk&gt;</code>, the dataset was reduced by <code>95%</code> and training was <strong>much</strong> quicker.<br>
+Therefore, we could set <code>context_size=20</code> and <code>epoch_count=30</code>. It might not seem like much, we gave the <code>rnn</code> models special training.<br>
+We had &quot;great success&quot; with <code>batch_size=8192</code>, and decided to keep that value.<br>
+The context for training and validation are the <code>10</code> words before and after the target.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>context_size</code>*</th>
+<th style="text-align:center"><code>batch_size</code></th>
+<th style="text-align:center"><code>epoch_count</code>*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>20</code></td>
+<td style="text-align:center"><code>8192</code></td>
+<td style="text-align:center"><code>30</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>*</code>: When training the <code>rnn</code>-networks, we trained with a context size <code>20</code>, then <code>18</code>, then <code>16</code> and all the way to <code>2</code> for each epoch.<br>
+This was so that the model, <em>if it were to win</em>, could be tested with varying context size.</p>
+<h2 id="32-training">3.2 Training</h2>
+<p>We trained six <code>rnn</code>-network variants and three <code>mlp</code>-network variants.</p>
+<h3 id="rnn-layout">RNN Layout</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    Context --> |Embeddings| RNN --> |ReLU| FC1 --> |ReLU| FC2 --> |LogSoftmax| Output
+    RNN --> |Keep last output| RNN
+</div></code></pre>
+<h3 id="mlp-layout">MLP Layout</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    Context --> |Embeddings| FC1 --> |ReLU| FC2 --> |ReLU| FC3 --> |ReLU| FC4 --> |LogSoftmax| Output
+</div></code></pre>
+<h3 id="rnn-losses">RNN Losses</h3>
+<p>Please note that when reading these graphs, the loss of <code>Context size 2</code> starts where the loss of <code>Context size 1</code> ended.<br>
+That is: <code>2</code> continures training from where <code>1</code> stopped.</p>
+<p><img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_Adam-lr0.0001.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_Adam-lr0.0010.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_Adam-lr0.0020.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_Adam-lr0.0030.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_SGD-lr0.0010.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveRNN_CrossEntropyLoss_SGD-lr0.0100.png" alt="Loss"></p>
+<h3 id="mlp-losses">MLP Losses</h3>
+<p>Unlike the <code>rnn</code>-models, the <code>mlp</code>-models could probably do with a bit more training.<br>
+We can see that the loss-curves have not yet flattened out like the others have.
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveMLP_CrossEntropyLoss_SGD-lr0.0001.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveMLP_CrossEntropyLoss_Adam-lr0.0001.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_BeHaveMLP_CrossEntropyLoss_Adam-lr0.0010.png" alt="Loss"><br>
+<em>It's incredible how much more smooth the curves are using the <code>Adam</code> optimizer!</em></p>
+<h3 id="mlp-w-attention-losses">MLP w. attention Losses</h3>
+<p>We failed to get the attention layer working.</p>
+<h2 id="33-selection">3.3 Selection</h2>
+<p>Like in the <code>CBOW</code>-training, the loss curves are not comparable, and we should not compare using the training data anyways.<br>
+Here are the model performances on the validation data:<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracy_behave.png" alt="Validation"></p>
+<p>We can se that two models outperform the others by a long-shot: <code>BeHaveMLP_CrossEntropyLoss_Adam-lr0.0010</code> and <code>BeHaveMLP_CrossEntropyLoss_Adam-lr0.0010</code>.</p>
+<p>Since <code>BeHaveMLP_CrossEntropyLoss_Adam-lr0.0010</code> performed the best, it was selected and tested on test-data to get a better estimate of real world performance:<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracy_behave_best.png" alt="Performance"><br>
+As expected, it performed best on the data on which is was trained, slightly worse on the data it competed on and the worst on the completely unseen data.</p>
+<h2 id="34-usage">3.4 Usage</h2>
+<p>In the notebook, you can try this model using a <code>21</code>-word sentence and the <code>try_behave</code>-function.<br>
+An example can be found:</p>
+<pre class="hljs"><code><div><span class="hljs-comment"># From the beginning of Dracula </span>
+<span class="hljs-comment"># This is a text snippet from the training data, and will have a bias for success</span>
+behave_try(<span class="hljs-string">"and that as it was a national dish I should"</span>, <span class="hljs-string">"able to get it anywhere along the Carpathians I found"</span>)
+<span class="hljs-comment"># Output: and that as it was a national dish I should (be) able to get it anywhere along the Carpathians I found</span>
+</div></code></pre>
+<p><strong>NOTE:</strong> If an <code>mlp</code>-wins, <em>which happened</em>, the two input parameters must contain exactly <code>10</code> tokens each, otherwise an exception is thrown:</p>
+<pre class="hljs"><code><div>behave_try(<span class="hljs-string">"Who"</span>, <span class="hljs-string">"you"</span>)
+<span class="hljs-comment"># Output: RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x64 and 640x32)</span>
+</div></code></pre>
+<h1 id="4-text-generation">4. Text generation</h1>
+<p>This task also relies on the <code>embeddings</code> and <code>vocabulary</code>.<br>
+We made a fairly simple model:</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    Context --> |Embeddings| RNN --> |ReLU| FC1 --> |ReLU| FC2 --> |ReLU| FC3 --> |LogSoftmax| Output
+    RNN --> |Keep last output| RNN
+</div></code></pre>
+<h2 id="41-global-parameters">4.1 Global parameters</h2>
+<p>When making the <code>be/have</code> models, we could reduce the training data significantly by removing the targets we did not care about. That is not an option here.<br>
+Therefore, to make things run as fast as possible, we want the batch_size to be as high as possible.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><code>context_size</code></th>
+<th style="text-align:center"><code>batch_size</code></th>
+<th style="text-align:center"><code>epoch_count</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>20</code></td>
+<td style="text-align:center"><code>8192</code></td>
+<td style="text-align:center"><code>100</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="42-training">4.2 Training</h2>
+<p>This time, due to the insane training times, we decided to only train three models.<br>
+<em>On a side note:</em> When starting to train this model, we picked a very high dimension for the hidden state.<br>
+But the hidden state keeps a copy of its history when the batch_size increases and thus ate around <code>2GB</code> of memory per second when training. That memory is not released until the kernel is restarted.</p>
+<h3 id="loss">Loss</h3>
+<p>We can see that the first two models hit a bump on their way to their final performance, but managed to get out.<br>
+We also suspect that the first two models could benefit from longer training, but the last model, <code>Gen1Rnn_CrossEntropyLoss_Adam-lr0.0100</code>, would probably not.<br>
+It's learning rate seems to be to high, and thus it occilates.
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_Gen1Rnn_CrossEntropyLoss_Adam-lr0.0001.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_Gen1Rnn_CrossEntropyLoss_Adam-lr0.0010.png" alt="Loss">
+<img src="file:///workspaces/uib.inf265.project3/docs/loss_Gen1Rnn_CrossEntropyLoss_Adam-lr0.0100.png" alt="Loss"></p>
+<h2 id="43-selection">4.3 Selection</h2>
+<p>As said before, the models compete on the validation data, where this time <code>Gen1Rnn_CrossEntropyLoss_Adam-lr0.0010</code> won.<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracy_gen.png" alt="Accuracy"></p>
+<p>It was then tested on some test_data where it somehow perfomed betten than on the validation data and even the training data.<br>
+<img src="file:///workspaces/uib.inf265.project3/docs/accuracy_gen_best.png" alt="Best"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Training</th>
+<th style="text-align:center">Validation</th>
+<th style="text-align:center">Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>21%</code></td>
+<td style="text-align:center"><code>20%</code></td>
+<td style="text-align:center"><code>22%</code></td>
+</tr>
+</tbody>
+</table>
+<p>This was surprising, so surpricing in fact, we ran the whole training twice to confirm. (Mind you each run is around <code>3.5 hours</code> on the computer listed above)</p>
+<h2 id="44-usage">4.4 Usage</h2>
+<p>Here comes the fun part!<br>
+To try the text generation, you have a fiew options:</p>
+<h3 id="trygen">try_gen</h3>
+<p>Generates some text based on a prompt.</p>
+<blockquote>
+<p><code>prompt</code>: <strong>[Required]</strong> <strong>[str]</strong> String marking the beginning of a sentence.<br>
+<code>mode</code>: <strong>[Optional]</strong> <strong>[best|beam]</strong> The mode used to generate text<br>
+<code>max_depth</code>: <strong>[Optional]</strong> <strong>[int]</strong> Maximum length of produced text</p>
+</blockquote>
+<h3 id="gengetcandidates">gen_get_candidates</h3>
+<p>Finds the top <code>n</code> candidates for the next word along with their probabilities.</p>
+<blockquote>
+<p><code>prompt</code>: <strong>[Required]</strong> <strong>[str]</strong> String marking the beginning of a context.<br>
+<code>top</code>: <strong>[Required]</strong> <strong>[int]</strong> Number of candidates to return<br>
+<code>print_enabled</code>: <strong>[Optional]</strong> <strong>[bool]</strong> If <code>true</code>, the prompt is printed with its candidates in order.</p>
+</blockquote>
+<p>In the notebook, we have already made some runs:</p>
+<pre class="hljs"><code><div>gen_get_candidates(<span class="hljs-string">"Once upon a time, there was"</span>, top=<span class="hljs-number">10</span>)
+<span class="hljs-comment"># Output: once upon a time , there was (a|no|nothing|the|an|not|something|some|one|only)</span>
+
+try_gen(<span class="hljs-string">"Once upon a time, there was"</span>, mode=<span class="hljs-string">"best"</span>, max_depth=<span class="hljs-number">18</span>)
+<span class="hljs-comment"># Output: Once upon a time, there was no one to the king , and the king had the same to him . the king was</span>
+
+try_gen(<span class="hljs-string">"The man was"</span>, mode=<span class="hljs-string">"best"</span>, max_depth=<span class="hljs-number">30</span>)
+<span class="hljs-comment"># Output: The man was much , and the king s daughter was in the same way . the king s son was a great force</span>
+
+try_gen(<span class="hljs-string">"When I was young, I was quite the detective. In the weekends I"</span>, mode=<span class="hljs-string">"best"</span>, max_depth=<span class="hljs-number">10</span>)
+<span class="hljs-comment"># Output: When I was young, I was quite the detective. In the weekends I saw the door , and the other , and the</span>
+</div></code></pre>
+<p>As we can see, the model very quickly falls into loops or starts saying nonsense.<br>
+Still i was facinated by how, if you look at it from the right angle, there are hints of cohesion.</p>
+
+</body>
+</html>
